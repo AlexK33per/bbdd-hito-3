@@ -21,4 +21,16 @@ public class Dragon {
     public String getName() {
         return this.name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getLife_points() {
+        return life_points;
+    }
+
+    public void setLife_points(int life_points) {
+        this.life_points = life_points;
+    }
 }
