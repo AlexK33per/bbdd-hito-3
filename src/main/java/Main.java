@@ -40,21 +40,26 @@ public class Main {
 
     }
 
-        String query =
-                "SELECT * " +
-                "FROM dyc.mata" +
-                "WHERE NombreE = squadName";
+    public static List<Dragon> squad_derrota_dragones(String squadName){
+        // @TODO: complete este método para que devuelva una lista de los dragones derrotados por el squad
+        // Tenga en cuenta que la consulta a la base de datos le devolverá un ResultSet sobre el que deberá
+        // ir iterando y creando un objeto dragon para cada uno de los dragones, y añadirlos a la lista
+        ResultSet rs = null;
+        List<Dragon> defeated = new ArrayList<Dragon>();
         try {
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
+            PreparedStatement stmn = conn.prepareStatement(
+                    "SELECT * " +
+                            "FROM dyc.mata" +
+                            "WHERE NombreE = ?");
+            stmn.setString(1, squadName);
+            rs = stmn.executeQuery();
             while (rs.next()) {
                 Dragon current = new Dragon(rs.getString("NombreD"), rs.getInt("VidaD"));
                 defeated.add(current);
             }
         } catch (SQLException exception) {
-            // @TODO:
+            System.out.println("La query ha fallado");
         }
-
         return defeated;
     }
 
@@ -62,7 +67,7 @@ public class Main {
         // @TODO: complete este método para que muestre por pantalla las hachas que pueden forjarse en "nombre_forja"
         // Tenga en cuenta que la consulta a la base de datos le devolverá un ResultSet sobre el que deberá
         // ir iterando y creando un objeto con cada hacha disponible en esa forja, y añadirlos a la lista
-        return lista;
+        return new ArrayList<Hacha>();
     }
 
     public static String espada_porta_guerrero(String nombre_guerrero){
