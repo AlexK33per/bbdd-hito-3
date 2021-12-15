@@ -19,7 +19,6 @@ public class Main {
     private static Connection conn;
 
 
-
     public static void main(String[] args) throws Exception {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -41,13 +40,6 @@ public class Main {
 
     }
 
-    public static List<Dragon> squad_derrota_dragones(String squadName){
-        // @TODO: complete este método para que devuelva una lista de los dragones derrotados por el squad
-        // Tenga en cuenta que la consulta a la base de datos le devolverá un ResultSet sobre el que deberá
-        // ir iterando y creando un objeto dragon para cada uno de los dragones, y añadirlos a la lista
-        Statement statement = null;
-        ResultSet rs = null;
-        List<Dragon> defeated = new ArrayList<Dragon>();
         String query =
                 "SELECT * " +
                 "FROM dyc.mata" +
