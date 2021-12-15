@@ -14,9 +14,9 @@ JDBC
 
 CLASES NECESARIOS JDBC
 *dragon --> Modelo
-*escuadron --> Adri
+*escuadron --> done
 *hacha --> done
-*forja --> Marta
+*forja --> done
 *guerero --> done
 *espada --> done
 
