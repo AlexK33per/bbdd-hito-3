@@ -40,19 +40,28 @@ public class Main {
 
     }
 
-    public static List<Dragon> squad_derrota_dragones(Long id_squad){
-        // @TODO: complete este método para que devuelva una lista de los dragones derrotados por el squad
-        // Tenga en cuenta que la consulta a la base de datos le devolverá un ResultSet sobre el que deberá
-        // ir iterando y creando un objeto dragon para cada uno de los dragones, y añadirlos a la lista
-        return lista;
+        String query =
+                "SELECT * " +
+                "FROM dyc.mata" +
+                "WHERE NombreE = squadName";
+        try {
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                Dragon current = new Dragon(rs.getString("NombreD"), rs.getInt("VidaD"));
+                defeated.add(current);
+            }
+        } catch (SQLException exception) {
+            // @TODO:
+        }
+
+        return defeated;
     }
 
     public static List<Hacha> mostrar_hachas(String nombre_forja){
         // @TODO: complete este método para que muestre por pantalla las hachas que pueden forjarse en "nombre_forja"
         // Tenga en cuenta que la consulta a la base de datos le devolverá un ResultSet sobre el que deberá
         // ir iterando y creando un objeto con cada hacha disponible en esa forja, y añadirlos a la lista
-
-        
         return lista;
     }
 
