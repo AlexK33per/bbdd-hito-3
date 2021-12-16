@@ -8,13 +8,13 @@ public class Main {
 
     private static final String DB_SERVER = "xxxx";
 
-    private static final int DB_PORT = xxxx;
+    private static final int DB_PORT = 3606;
 
-    private static final String DB_NAME = "xxxx";
+    private static final String DB_NAME = "dyc";
 
-    private static final String DB_USER = "xxxx";
+    private static final String DB_USER = "root";
 
-    private static final String DB_PASS = "xxxx";
+    private static final String DB_PASS = "root";
 
     private static Connection conn;
 
@@ -24,7 +24,7 @@ public class Main {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         String url = "jdbc:mysql://" + DB_SERVER + ":" + DB_PORT + "/" + DB_NAME;
-        conn = DriverManager.getConnection(url, DB_USER, DB_PASS);
+        conn = DriverManager.getConnection(url, DB_USEroot, DB_PASS);
 
         // @TODO pruebe sus funciones
 
