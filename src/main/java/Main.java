@@ -1,7 +1,11 @@
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping;
+import com.mysql.cj.protocol.Resultset;
 import game.model.Dragon;
+import game.model.Espada;
 
 public class Main {
     // @TODO: Sustituya xxxx por los parámetros de su conexión
@@ -67,12 +71,27 @@ public class Main {
         // @TODO: complete este método para que muestre por pantalla las hachas que pueden forjarse en "nombre_forja"
         // Tenga en cuenta que la consulta a la base de datos le devolverá un ResultSet sobre el que deberá
         // ir iterando y creando un objeto con cada hacha disponible en esa forja, y añadirlos a la lista
+
         return new ArrayList<Hacha>();
     }
 
-    public static String espada_porta_guerrero(String nombre_guerrero){
+    public static Resultset espada_porta_guerrero(String nombre_guerrero) {
         // @TODO: complete este método para que devuelva el nombre de la espada que porta el guerrero "nombre_guerrero"
-        return "espadón";
-    }
+        Statement stmt = null;
+        Resultset rs = null;
+        try {
+            stmt = conn.createSatement();
+            if (stmt.executeQuery(
+                    "SELECT nombreEspada" +
+                            "FROM Espada JOIN PortaE ON Espada.idEspada = PortaE.idEspada JOIN Guerrero ON PortaE.NombreP = Guerrero.NombreP" +
+                            "WHERE Guerrero.NombreP LIKE" + nombre_guerrero)
+            ) {
+                rs = stmt.getResultSet();
+            }
 
-}
+        } catch (SQLException exception) {
+            System.out.println("Fallo en la query Mostrar nombre Espada");
+
+        }
+        return rs;
+    }

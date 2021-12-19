@@ -9,8 +9,8 @@ POR HACER:
 JDBC
 1. Añadir un dragon >> nuevo dragon(String nombre) --> Alex
 2. query de >> print de dragones derrotados por el escuadron con id = x >> squad derrota dragones(Long id squad) --> done
-3. query de >> mostrar hachas que se llamen xxxxx >> mostrar hachas(String nombre forja) --> Lau
-4. query de >> mostrar nombre arma portada por guerrero xxxx >> espada porta guerrero(String nombre guerrero) --> Marta
+3. query de >> mostrar hachas que se llamen xxxxx >> mostrar hachas(String nombre forja) --> Lau // Falta Pushear
+4. query de >> mostrar nombre arma portada por guerrero xxxx >> espada porta guerrero(String nombre guerrero) --> done
 
 CLASES NECESARIOS JDBC
 *dragon --> Modelo
@@ -19,6 +19,9 @@ CLASES NECESARIOS JDBC
 *forja --> done
 *guerero --> done
 *espada --> done
+*catalogaH --> NombreF y IdHacha --> done
+*portaE --> NombreP y IdEspada --> done
+
 
 HIBERNATE
 1. crear contraseña y conectar puerto 3306
