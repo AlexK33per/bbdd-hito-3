@@ -1,19 +1,19 @@
 package game.model;
 
 public class CatalogaH {
-   Private String nombreF;
-   Private String idHacha;
+   private String nombreF;
+   private String idHacha;
 
-    public CatalogaH(Private string, Private string1) {
-        String = string;
-        String = string1;
+    public CatalogaH(String string, String string1) {
+        nombreF = string;
+        idHacha = string1;
     }
 
-    public Private getString() {
-        return String;
+    public String getNombre() {
+        return nombreF;
     }
 
-    public void setString(Private string) {
-        String = string;
+    public void setNombre(String string) {
+        nombreF = string;
     }
 }

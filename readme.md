@@ -7,8 +7,8 @@ Este proyecto contiene la plantilla de código fuente para realizar el Apartado 
 POR HACER:
 
 JDBC
-1. Añadir un dragon >> nuevo dragon(String nombre) --> Alex
-2. query de >> print de dragones derrotados por el escuadron con id = x >> squad derrota dragones(Long id squad) --> done
+1. Añadir un dragon >> nuevo dragon(String nombre) --> Alex --> done
+2. query de >> print de dragones derrotados por el escuadron con id = x >> squad derrota dragones(Long id squad) --> done  OJO, ES CON UN ID Y ESTA HECHO CON EL NOMBRE DEL SQUAD
 3. query de >> mostrar hachas que se llamen xxxxx >> mostrar hachas(String nombre forja) --> Lau // Falta Pushear
 4. query de >> mostrar nombre arma portada por guerrero xxxx >> espada porta guerrero(String nombre guerrero) --> done
 
