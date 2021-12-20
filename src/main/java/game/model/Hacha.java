@@ -1,5 +1,6 @@
 package game.model;
 
+
 public class Hacha {
     private int idHacha;
     private String nombreHacha;

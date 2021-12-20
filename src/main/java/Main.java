@@ -29,11 +29,11 @@ public class Main {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         String url = "jdbc:mysql://" + DB_SERVER + ":" + DB_PORT + "/" + DB_NAME;
-        conn = DriverManager.getConnection(url, DB_USEroot, DB_PASS);
+        conn = DriverManager.getConnection(url, DB_USER, DB_PASS);
 
         // @TODO pruebe sus funciones
         nuevo_dragon("Viseryon");
-        ArrayList<Object> hachas = mostrar_hachas("Forja de Tebez");
+        List<Hacha> hachas = mostrar_hachas("Forja de Tebez");
         for(Hacha a : hachas) {
             System.out.println(a.getNombreHacha());
         }
@@ -87,13 +87,18 @@ public class Main {
         // @TODO: complete este método para que muestre por pantalla las hachas que pueden forjarse en "nombre_forja"
         // Tenga en cuenta que la consulta a la base de datos le devolverá un ResultSet sobre el que deberá
         // ir iterando y creando un objeto con cada hacha disponible en esa forja, y añadirlos a la lista
-        PreparedStatement stmn = conn.prepareStatement("SELECT * FROM Hacha JOIN CatalogaH ON Hacha.idHacha = CatalogaH.idHacha WHERE CatalogaH.nombreF = ?");
-        stmn.setString(1, nombre_forja);
-        ResultSet rs = stmn.executeQuery();
         List<Hacha> hachas = new ArrayList<>();
-        while (rs.next()) {
-            System.out.println(rs.getString("nombreHacha"));
-            hachas.add(rs.getString("nombreHacha"));
+        try{
+            PreparedStatement stmn = conn.prepareStatement("SELECT * FROM Hacha JOIN CatalogaH ON Hacha.idHacha = CatalogaH.idHacha WHERE CatalogaH.nombreF = ?");
+            stmn.setString(1, nombre_forja);
+            ResultSet rs = stmn.executeQuery();
+            while (rs.next()) { 
+                Hacha current = new Hacha(rs.getInt("idHacha"), rs.getString("nombreHacha"), rs.getInt("pesoHacha"), rs.getInt("danoHacha"));
+                hachas.add(current);
+            }
+        }
+        catch (SQLException exception) {
+            System.out.println("La query ha fallado");
         }
         return hachas;
     }
