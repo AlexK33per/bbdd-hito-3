@@ -83,13 +83,21 @@ public class Main {
         return defeated;
     }
 
-    public static ArrayList<Object> mostrar_hachas(String nombre_forja){
+    public static List<Hacha> mostrar_hachas(String nombre_forja){
         // @TODO: complete este método para que muestre por pantalla las hachas que pueden forjarse en "nombre_forja"
         // Tenga en cuenta que la consulta a la base de datos le devolverá un ResultSet sobre el que deberá
         // ir iterando y creando un objeto con cada hacha disponible en esa forja, y añadirlos a la lista
-
-        return new ArrayList<Object>();
+        PreparedStatement stmn = conn.prepareStatement("SELECT * FROM Hacha JOIN CatalogaH ON Hacha.idHacha = CatalogaH.idHacha WHERE CatalogaH.nombreF = ?");
+        stmn.setString(1, nombre_forja);
+        ResultSet rs = stmn.executeQuery();
+        List<Hacha> hachas = new ArrayList<>();
+        while (rs.next()) {
+            System.out.println(rs.getString("nombreHacha"));
+            hachas.add(rs.getString("nombreHacha"));
+        }
+        return hachas;
     }
+
 
     public static ResultSet espada_porta_guerrero(String nombre_guerrero) {
         // @TODO: complete este método para que devuelva el nombre de la espada que porta el guerrero "nombre_guerrero"
