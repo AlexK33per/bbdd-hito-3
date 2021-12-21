@@ -89,7 +89,7 @@ public class Main {
         // ir iterando y creando un objeto con cada hacha disponible en esa forja, y añadirlos a la lista
         List<Hacha> hachas = new ArrayList<>();
         try{
-            PreparedStatement stmn = conn.prepareStatement("SELECT * FROM Hacha JOIN CatalogaH ON Hacha.idHacha = CatalogaH.idHacha WHERE CatalogaH.nombreF = ?");
+            PreparedStatement stmn = conn.prepareStatement("SELECT * FROM Hacha JOIN CatalogaH ON Hacha.idHacha = CatalogaH.idHacha WHERE CatalogaH.nombreF LIKE ?");
             stmn.setString(1, nombre_forja);
             ResultSet rs = stmn.executeQuery();
             while (rs.next()) { 
@@ -112,7 +112,7 @@ public class Main {
             stmt = conn.createStatement();
             rs = stmt.executeQuery( "SELECT nombreEspada" +
                             "FROM Espada JOIN PortaE ON Espada.idEspada = PortaE.idEspada JOIN Guerrero ON PortaE.NombreP = Guerrero.NombreP" +
-                            "WHERE Guerrero.NombreP LIKE" + nombre_guerrero);
+                            "WHERE Guerrero.NombreP LIKE " + nombre_guerrero);
             if (rs.getString(1).equals("") && rs.getString(1) != null) {
                 rs = stmt.getResultSet();
             }
