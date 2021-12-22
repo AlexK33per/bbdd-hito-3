@@ -10,7 +10,7 @@ public class Main {
 
     private static final String DB_SERVER = "localhost";
 
-    private static final int DB_PORT = 3606;
+    private static final int DB_PORT = 3306;
 
     private static final String DB_NAME = "dyc";
 
@@ -67,7 +67,7 @@ public class Main {
             PreparedStatement stmn = conn.prepareStatement(
                     "SELECT * " +
                             "FROM dyc.mata" +
-                            "WHERE NombreE = ?");
+                            " WHERE NombreE = ?");
             stmn.setString(1, squadName);
             rs = stmn.executeQuery();
             while (rs.next()) {
@@ -86,7 +86,7 @@ public class Main {
         // ir iterando y creando un objeto con cada hacha disponible en esa forja, y añadirlos a la lista
         List<Arma> hachas = new ArrayList<>();
         try{
-            PreparedStatement stmn = conn.prepareStatement("SELECT * FROM Arma JOIN CatalogaH ON Arma.idArma = CatalogaH.idArma WHERE Arma.NombreR = ? AND CatalogaH.nombreF LIKE ?");
+            PreparedStatement stmn = conn.prepareStatement("SELECT * FROM Arma JOIN Cataloga ON Arma.idArma = Cataloga.idArma WHERE Arma.NombreR LIKE ? AND CatalogaH.nombreF LIKE ?");
             stmn.setString(2, nombre_forja);
             stmn.setString(1, "Tanque");
             ResultSet rs = stmn.executeQuery();
@@ -109,7 +109,7 @@ public class Main {
         String espada = null;
         try {
             stmt = conn.createStatement();
-            rs = stmt.executeQuery( "SELECT NombreA FROM Arma JOIN PortaE ON Arma.IdArma = PortaE.IdArma JOIN PortaE.NombreP = Personaje.NombreP WHERE Personaje.NombreP LIKE " + nombre_guerrero);
+            rs = stmt.executeQuery( "SELECT NombreA FROM Arma JOIN ComprarArma ON Arma.IdArma = ComprarArma.IdArma JOIN Personaje WHERE ComprarArma.NombreP = Personaje.NombreP AND Personaje.NombreP LIKE " + nombre_guerrero);
             if (!rs.getString(1).equals("") && rs.getString(1) != null) {
                 rs = stmt.getResultSet();
                 espada = rs.getString("NombreA");
@@ -121,8 +121,3 @@ public class Main {
         return espada;
     }
 }
- /* "SELECT nombreEspada" +
-                            "FROM Espada JOIN PortaE ON Espada.idEspada = PortaE.idEspada JOIN Guerrero ON PortaE.NombreP = Guerrero.NombreP" +
-                            "WHERE Guerrero.NombreP LIKE " + nombre_guerrero */
-
- /* @TODO: que me cargue Guerrero, Hacha y Espada, y hacer clases Personaje, Rol y Arma */
