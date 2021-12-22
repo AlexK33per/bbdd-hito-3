@@ -27,20 +27,6 @@ public class Personaje {
         this.nombreR = nombreR;
     }
 
-    public Guerrero(){
-        this.nombreP = " ";
-        this.vida = 500;
-        this.totalOro = 0;
-        this.nivel = 0;
-        this.daga = "basica";
-        this.mana = 0;
-        this.cargaT = 70;
-        this.manaMax = 300;
-        this.vidaMax = 2000;
-        this.apariencia = " ";
-    
-    }
-
     public String getNombreP(){
         return this.nombreP;
     }

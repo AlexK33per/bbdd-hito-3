@@ -5,7 +5,7 @@ public class Rol {
     private int vidaMax = 300;
     private String nombreR;
 
-    public Personaje(String nombreR) {
+    public Rol(String nombreR) {
         this.nombreR = nombreR;
     }
 }
