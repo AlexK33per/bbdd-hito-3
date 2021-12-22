@@ -1,10 +1,10 @@
 package game.model;
 
-public class CatalogaH {
+public class Cataloga {
    private String nombreF;
    private String idArma;
 
-    public CatalogaH(String string, String string1) {
+    public Cataloga(String string, String string1) {
         nombreF = string;
         idArma = string1;
     }

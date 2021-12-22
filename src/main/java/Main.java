@@ -109,7 +109,7 @@ public class Main {
         String espada = null;
         try {
             stmt = conn.createStatement();
-            rs = stmt.executeQuery( "SELECT NombreA FROM Arma JOIN PortaE ON Arma.IdArma = PortaE.IdArma JOIN PortaE.NombreP = Personaje.NombreP WHERE Guerrero.NombreP LIKE " + nombre_guerrero);
+            rs = stmt.executeQuery( "SELECT NombreA FROM Arma JOIN PortaE ON Arma.IdArma = PortaE.IdArma JOIN PortaE.NombreP = Personaje.NombreP WHERE Personaje.NombreP LIKE " + nombre_guerrero);
             if (!rs.getString(1).equals("") && rs.getString(1) != null) {
                 rs = stmt.getResultSet();
                 espada = rs.getString("NombreA");
