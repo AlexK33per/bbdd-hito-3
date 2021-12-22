@@ -123,3 +123,5 @@ public class Main {
         return rs;
     }
 }
+
+ /* @TODO: que me cargue Guerrero, Hacha y Espada, y hacer clases Personaje, Rol y Arma */
