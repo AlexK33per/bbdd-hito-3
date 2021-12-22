@@ -2,11 +2,11 @@ package game.model;
 
 public class CatalogaH {
    private String nombreF;
-   private String idHacha;
+   private String idArma;
 
     public CatalogaH(String string, String string1) {
         nombreF = string;
-        idHacha = string1;
+        idArma = string1;
     }
 
     public String getNombre() {

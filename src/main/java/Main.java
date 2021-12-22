@@ -4,10 +4,7 @@ import java.util.List;
 
 import com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping;
 import com.mysql.cj.protocol.Resultset;
-import game.model.Dragon;
-import game.model.Espada;
-import game.model.Hacha;
-
+import game.model.*;
 public class Main {
     // @TODO: Sustituya xxxx por los parámetros de su conexión
 
@@ -33,9 +30,9 @@ public class Main {
 
         // @TODO pruebe sus funciones
         nuevo_dragon("Viseryon");
-        List<Hacha> hachas = mostrar_hachas("Forja de Tebez");
-        for(Hacha a : hachas) {
-            System.out.println(a.getNombreHacha());
+        List<Arma> hachas = mostrar_hachas("Forja de Tebez");
+        for(Arma a : hachas) {
+            System.out.println(a.getNombreA());
         }
         List<Dragon> lista = squad_derrota_dragones("Ready to Rumble");
         for(Dragon d : lista) {
@@ -83,17 +80,18 @@ public class Main {
         return defeated;
     }
 
-    public static List<Hacha> mostrar_hachas(String nombre_forja){
+    public static List<Arma> mostrar_hachas(String nombre_forja){
         // @TODO: complete este método para que muestre por pantalla las hachas que pueden forjarse en "nombre_forja"
         // Tenga en cuenta que la consulta a la base de datos le devolverá un ResultSet sobre el que deberá
         // ir iterando y creando un objeto con cada hacha disponible en esa forja, y añadirlos a la lista
-        List<Hacha> hachas = new ArrayList<>();
+        List<Arma> hachas = new ArrayList<>();
         try{
-            PreparedStatement stmn = conn.prepareStatement("SELECT * FROM Hacha JOIN CatalogaH ON Hacha.idHacha = CatalogaH.idHacha WHERE CatalogaH.nombreF LIKE ?");
-            stmn.setString(1, nombre_forja);
+            PreparedStatement stmn = conn.prepareStatement("SELECT * FROM Arma JOIN CatalogaH ON Arma.idArma = CatalogaH.idArma WHERE Arma.NombreR = ? AND CatalogaH.nombreF LIKE ?");
+            stmn.setString(2, nombre_forja);
+            stmn.setString(1, "Tanque");
             ResultSet rs = stmn.executeQuery();
             while (rs.next()) { 
-                Hacha current = new Hacha(rs.getInt("idHacha"), rs.getString("nombreHacha"), rs.getInt("pesoHacha"), rs.getInt("danoHacha"));
+                Arma current = new Arma(rs.getString("NombreA"), rs.getInt("Peso"), rs.getInt("Daño"), rs.getLong("IdArma"), rs.getString("NombreR"));
                 hachas.add(current);
             }
         }
@@ -104,24 +102,27 @@ public class Main {
     }
 
 
-    public static ResultSet espada_porta_guerrero(String nombre_guerrero) {
+    public static String espada_porta_guerrero(String nombre_guerrero) {
         // @TODO: complete este método para que devuelva el nombre de la espada que porta el guerrero "nombre_guerrero"
         Statement stmt = null;
         ResultSet rs = null;
+        String espada = null;
         try {
             stmt = conn.createStatement();
-            rs = stmt.executeQuery( "SELECT nombreEspada" +
-                            "FROM Espada JOIN PortaE ON Espada.idEspada = PortaE.idEspada JOIN Guerrero ON PortaE.NombreP = Guerrero.NombreP" +
-                            "WHERE Guerrero.NombreP LIKE " + nombre_guerrero);
-            if (rs.getString(1).equals("") && rs.getString(1) != null) {
+            rs = stmt.executeQuery( "SELECT NombreA FROM Arma JOIN PortaE ON Arma.IdArma = PortaE.IdArma JOIN PortaE.NombreP = Personaje.NombreP WHERE Guerrero.NombreP LIKE " + nombre_guerrero);
+            if (!rs.getString(1).equals("") && rs.getString(1) != null) {
                 rs = stmt.getResultSet();
+                espada = rs.getString("NombreA");
             }
         } catch (SQLException exception) {
             System.out.println("Fallo en la query Mostrar nombre Espada");
 
         }
-        return rs;
+        return espada;
     }
 }
+ /* "SELECT nombreEspada" +
+                            "FROM Espada JOIN PortaE ON Espada.idEspada = PortaE.idEspada JOIN Guerrero ON PortaE.NombreP = Guerrero.NombreP" +
+                            "WHERE Guerrero.NombreP LIKE " + nombre_guerrero */
 
  /* @TODO: que me cargue Guerrero, Hacha y Espada, y hacer clases Personaje, Rol y Arma */
